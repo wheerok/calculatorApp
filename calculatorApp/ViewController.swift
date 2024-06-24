@@ -36,7 +36,6 @@ class ViewController: UIViewController {
         let keypadBtn7 = UIButton()
         keypadBtn7.setTitle("7", for: .normal)
         
-        
         let keypadBtn8 = UIButton()
         keypadBtn8.setTitle("8", for: .normal)
         
@@ -84,7 +83,7 @@ class ViewController: UIViewController {
         keypadBtnEquals.setTitle("=", for: .normal)
         
         let keypadBtnDivide = UIButton()
-        keypadBtnDivide.setTitle("-", for: .normal)
+        keypadBtnDivide.setTitle("/", for: .normal)
         
         let keypadBtnArr1 :[UIButton] = [keypadBtn7, keypadBtn8, keypadBtn9, keypadBtnPlus]
         let keypadBtnArr2 :[UIButton] = [keypadBtn4, keypadBtn5, keypadBtn6, keypadBtnMinus]
@@ -149,28 +148,28 @@ class ViewController: UIViewController {
             $0.width.equalTo(350)
             $0.top.equalTo(resultLabel.snp.bottom).offset(60)
             $0.centerX.equalToSuperview()
-            $0.leading.equalTo(view.snp.leading).offset(20)
-            $0.trailing.equalTo(view.snp.trailing).offset(-20)
+//            $0.leading.equalTo(view.snp.leading).offset(20)
+//            $0.trailing.equalTo(view.snp.trailing).offset(-20)
         }
     }
     
         @objc
         func btnTaped(_ sender : UIButton) {
-            guard let btntext = sender.title(for: .normal) else { return }
+            guard let btnText = sender.title(for: .normal) else { return }
             
             //AC 클릭 시 초기회
-            if btntext == "AC" { //UIButton의 title이 AC면
+            if btnText == "AC" { //UIButton의 title이 AC면
                 resultString = "0" // resultString의 값을 0으로
             } else if resultString == "0" {
-                resultString = btntext
-            } else if btntext == "="{
+                resultString = btnText
+            } else if btnText == "="{
                 if let result = calculate(expression: resultString){
                     resultString = "\(result)"
                 } else {
                     resultString = "Error"
                 } //if let
             } else {
-                resultString += btntext
+                resultString += btnText
             }
         }// btnTape
     
