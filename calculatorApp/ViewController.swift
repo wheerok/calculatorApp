@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     }
     var resultLabel = UILabel()
     
+    var isResultDisplayed = false
+    
     func resultView() {
         view.backgroundColor = .black
         resultLabel.text = "\(resultString)"
@@ -94,7 +96,7 @@ class ViewController: UIViewController {
             // in에 여러 개를 추가 시 +로 연결하면 됨
             
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 30)
             button.titleLabel?.textColor = .white
             button.backgroundColor = UIColor(red: 58/255, green: 58/255, blue: 58/255, alpha: 1.0)
             button.widthAnchor.constraint(equalToConstant: 80).isActive = true
@@ -103,6 +105,7 @@ class ViewController: UIViewController {
             button.addTarget(self, action: #selector(btnTaped(_:)), for: .touchDown)
         }
     
+
         
         // 연산자 버튼 컬러 변경
         let operators :[UIButton] = [keypadBtnPlus, keypadBtnMinus, keypadBtnMultiply,
@@ -157,14 +160,18 @@ class ViewController: UIViewController {
         func btnTaped(_ sender : UIButton) {
             guard let btnText = sender.title(for: .normal) else { return }
             
-            //AC 클릭 시 초기회
+            //AC 클릭 시 초기화
             if btnText == "AC" { //UIButton의 title이 AC면
                 resultString = "0" // resultString의 값을 0으로
+                isResultDisplayed = false
+            } else if isResultDisplayed {
+                	return
             } else if resultString == "0" {
                 resultString = btnText
             } else if btnText == "="{
                 if let result = calculate(expression: resultString){
                     resultString = "\(result)"
+                    isResultDisplayed =  true
                 } else {
                     resultString = "Error"
                 } //if let
@@ -184,4 +191,6 @@ class ViewController: UIViewController {
     
     }
     
-
+#Preview{
+    ViewController()
+}
